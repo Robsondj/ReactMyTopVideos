@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
@@ -36,6 +36,22 @@ function CadastroCategoria() {
 
     setValues(valoresIniciais);
   }
+
+  useEffect(() => {
+    if(window.location.href.includes('localhost')) {
+      const URL = 'http://localhost:4000/categorias';
+      fetch(URL)
+        .then(async (responseServer) => {
+          if(responseServer.ok) {
+            const response = await responseServer.json();
+            console.log(response);
+            setCategorias(response);
+            return;
+          }
+          throw new Error('Não foi possível carregar dados.');
+        })
+    }
+  }, []);// esse último parametro faz o useEffet atualizar apenas quando montar o componente
 
   return (
     <PageDefault>
