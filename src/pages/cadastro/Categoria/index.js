@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
+import useForm from '../../../hooks/useForm';
 
 function CadastroCategoria() {
   const valoresIniciais = {
@@ -9,23 +10,9 @@ function CadastroCategoria() {
     descricao: '',
     cor: ''
   }
+
+  const { values, handleChange, clearForm } = useForm(valoresIniciais);
   const [categorias, setCategorias] = useState([]);
-  const [values, setValues] = useState(valoresIniciais);
-
-  function setValue(chave, valor) {
-    setValues({
-      ...values,
-      [chave]: valor, // nome: 'valor'
-    });
-    console.log(values);
-  }
-
-  function handleChange(infosDoEvento) {
-    setValue(
-      infosDoEvento.target.getAttribute('name'),
-      infosDoEvento.target.value
-    );
-  }
 
   function handleSubmit(infosDoEvento) {
     infosDoEvento.preventDefault();
@@ -34,7 +21,7 @@ function CadastroCategoria() {
       values
     ]);
 
-    setValues(valoresIniciais);
+    clearForm();
   }
 
   useEffect(() => {
