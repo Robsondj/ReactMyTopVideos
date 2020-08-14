@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
-import PageDefault from '../../components/PageDefault';
+import PageDefault from '../../pages/PageDefault';
 import categoriasRepository from '../../repositories/categorias';
 
 function Home() {
