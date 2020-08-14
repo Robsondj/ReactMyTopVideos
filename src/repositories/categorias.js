@@ -22,7 +22,25 @@ function getAll() {
     })
 }
 
+function create(categoria) {
+  return fetch(`${URL_CATEGORIAS}?_embed=categorias`, {
+      method: 'POST',
+      headers: {
+          'Content-type': 'application/json'
+      },
+      body: JSON.stringify(categoria)
+  })
+    .then(async (serverResponse) => {
+        if(serverResponse.ok) {
+            return await serverResponse.json();
+        }
+
+        throw new Error('Não foi possível cadastrar categoria');
+    })
+}
+
 export default {
     getAllWithVideos,
-    getAll
+    getAll,
+    create
 }
