@@ -6,7 +6,8 @@ function getAllWithVideos() {
     return fetch(`${URL_CATEGORIAS}?_embed=videos`)
       .then(async (serverResponse) => {
           if(serverResponse.ok) {
-            return await serverResponse.json();
+            let response = await serverResponse.json();
+            return response.filter((resp) => resp.videos.length);
           }
           throw new Error('Não foi possível carregar categorias com videos.');
       })
